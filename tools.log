@@ -1,0 +1,9 @@
+git version 2.43.0
+Python 3.12.3
+cmake version 3.28.3
+GNU Make 4.3
+arm-none-eabi-gcc (15:13.2.rel1-2) 13.2.1 20231009
+code 1.135.0
+picotool v2.3.0 (Linux, GNU-11.4.0, Release)
+pico-sdk 2.2.0
+PICO_SDK_PATH=/home/nasil/Repositories/pico/pico-sdk
