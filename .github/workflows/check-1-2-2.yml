@@ -1,0 +1,11 @@
+name: 1.2.2 Светодиод и кнопка
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  check:
+    uses: ant-lab-ru/es-test/.github/workflows/check-1-2-2.yml@master
+    secrets:
+      ES_ACCOUNT_SECRET: ${{ secrets.ES_ACCOUNT_SECRET }}
