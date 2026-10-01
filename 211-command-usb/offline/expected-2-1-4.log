@@ -1,0 +1,62 @@
+источник: расчётная модель без платы; прошивка не исполнялась
+задание: 2.1.4
+проект: 211-command-usb
+устройство: отсутствует
+серийный номер: недоступен
+порт: отсутствует
+время: не измерялось; порядок обозначен номерами шагов
+bin sha256: 7d82292d20dce29cceca5afba3590511617f5f499878e527dea5557a24f90e85
+шаг 1 --> fw_info
+шаг 1 <-- object          address     value
+шаг 1 <-- main            0x10000525  0xb5f0
+шаг 1 <-- fw_info         0x100007d5  0x4b49
+шаг 1 <-- commands        0x10007f14
+шаг 1 <-- - enable        0x10000281
+шаг 1 <-- - disable       0x100002bd
+шаг 1 <-- - info          0x100002f9
+шаг 1 <-- - version       0x10000301
+шаг 1 <-- - ping          0x10000309
+шаг 1 <-- - mem_info      0x10000319
+шаг 1 <-- - fw_info       0x10000321
+шаг 1 <-- - dev_info      0x10000329
+шаг 1 <-- - boot_info     0x10000331
+шаг 1 <-- data_variable   0x20000f6c  101
+шаг 1 <-- bss_variable    0x20001e60  1
+шаг 1 <-- stack_variable  runtime address unavailable; initializer 1946
+шаг 1 <-- heap_variable   runtime address unavailable; initializer 1951
+шаг 2 --> fw_info
+шаг 2 <-- object          address     value
+шаг 2 <-- main            0x10000525  0xb5f0
+шаг 2 <-- fw_info         0x100007d5  0x4b49
+шаг 2 <-- commands        0x10007f14
+шаг 2 <-- - enable        0x10000281
+шаг 2 <-- - disable       0x100002bd
+шаг 2 <-- - info          0x100002f9
+шаг 2 <-- - version       0x10000301
+шаг 2 <-- - ping          0x10000309
+шаг 2 <-- - mem_info      0x10000319
+шаг 2 <-- - fw_info       0x10000321
+шаг 2 <-- - dev_info      0x10000329
+шаг 2 <-- - boot_info     0x10000331
+шаг 2 <-- data_variable   0x20000f6c  102
+шаг 2 <-- bss_variable    0x20001e60  2
+шаг 2 <-- stack_variable  runtime address unavailable; initializer 1946
+шаг 2 <-- heap_variable   runtime address unavailable; initializer 1951
+шаг 3 --> fw_info
+шаг 3 <-- object          address     value
+шаг 3 <-- main            0x10000525  0xb5f0
+шаг 3 <-- fw_info         0x100007d5  0x4b49
+шаг 3 <-- commands        0x10007f14
+шаг 3 <-- - enable        0x10000281
+шаг 3 <-- - disable       0x100002bd
+шаг 3 <-- - info          0x100002f9
+шаг 3 <-- - version       0x10000301
+шаг 3 <-- - ping          0x10000309
+шаг 3 <-- - mem_info      0x10000319
+шаг 3 <-- - fw_info       0x10000321
+шаг 3 <-- - dev_info      0x10000329
+шаг 3 <-- - boot_info     0x10000331
+шаг 3 <-- data_variable   0x20000f6c  103
+шаг 3 <-- bss_variable    0x20001e60  3
+шаг 3 <-- stack_variable  runtime address unavailable; initializer 1946
+шаг 3 <-- heap_variable   runtime address unavailable; initializer 1951

@@ -1,0 +1,23 @@
+источник: расчётная модель без платы; прошивка не исполнялась
+задание: 2.1.2
+проект: 211-command-usb
+устройство: отсутствует
+серийный номер: недоступен
+порт: отсутствует
+время: не измерялось; порядок обозначен номерами шагов
+bin sha256: 7d82292d20dce29cceca5afba3590511617f5f499878e527dea5557a24f90e85
+шаг 1 --> enable
+шаг 1 <-- led on
+шаг 2 --> disable
+шаг 2 <-- led off
+шаг 3 --> info
+шаг 3 <-- project: 211-command-usb
+шаг 3 <-- repo: https://github.com/nasir-prog/es-student
+шаг 3 <-- board: pico
+шаг 3 <-- serial: unavailable (no physical board)
+шаг 3 <-- chip: unavailable (hardware register not read)
+шаг 3 <-- pico-sdk: 2.3.0
+шаг 4 --> ping
+шаг 4 <-- pong
+шаг 5 --> nosuchcommand
+шаг 5 <-- unknown command: nosuchcommand

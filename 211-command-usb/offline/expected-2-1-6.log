@@ -1,0 +1,36 @@
+источник: расчётная модель без платы; прошивка не исполнялась
+задание: 2.1.6
+проект: 211-command-usb
+устройство: отсутствует
+серийный номер: недоступен
+порт: отсутствует
+время: не измерялось; порядок обозначен номерами шагов
+bin sha256: 7d82292d20dce29cceca5afba3590511617f5f499878e527dea5557a24f90e85
+шаг 1 --> boot_info
+шаг 1 <-- vector table   0x10000100
+шаг 1 <--   stack top    0x20042000
+шаг 1 <--   reset        0x100001f7
+шаг 1 <--   reset (even) 0x100001f6
+шаг 1 <-- gpio in        0xd0000004
+шаг 1 <--   led bit      0 (modeled)
+шаг 1 <--   gpio_get     0 (modeled)
+шаг 2 --> enable
+шаг 2 <-- led on
+шаг 3 --> boot_info
+шаг 3 <-- vector table   0x10000100
+шаг 3 <--   stack top    0x20042000
+шаг 3 <--   reset        0x100001f7
+шаг 3 <--   reset (even) 0x100001f6
+шаг 3 <-- gpio in        0xd0000004
+шаг 3 <--   led bit      1 (modeled)
+шаг 3 <--   gpio_get     1 (modeled)
+шаг 4 --> disable
+шаг 4 <-- led off
+шаг 5 --> boot_info
+шаг 5 <-- vector table   0x10000100
+шаг 5 <--   stack top    0x20042000
+шаг 5 <--   reset        0x100001f7
+шаг 5 <--   reset (even) 0x100001f6
+шаг 5 <-- gpio in        0xd0000004
+шаг 5 <--   led bit      0 (modeled)
+шаг 5 <--   gpio_get     0 (modeled)
