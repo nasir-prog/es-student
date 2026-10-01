@@ -1,13 +1,14 @@
 """Expected exchanges derived from the ARM build, without a connected Pico.
 
-This is a response model, not an emulator or a hardware test. It does not
-supply a board serial number or invent stack/allocator addresses.
+This is a response model, not an emulator or a hardware test. Zero serial
+and USB ID describe the model. Runtime addresses and timings are assumptions.
 Run: python3 offline/generate_logs.py
 """
 from pathlib import Path
 import hashlib
 import struct
 import subprocess
+from datetime import datetime, timezone, timedelta
 
 PROJECT = Path(__file__).resolve().parent.parent
 OUT = PROJECT / "offline"
@@ -81,16 +82,29 @@ card_name = card[4:17].split(b"\0")[0].decode("ascii")
 card_revision = card[17]
 initial_counter = struct.unpack("<I", ram_bytes(symbols["data_variable"], 4))[0]
 
+# Explicit model assumptions, not observed allocator/SP values.
+model_stack = symbols["__StackTop"] - 0x80
+model_heap = ((symbols["__bss_end__"] + 7) & ~7) + 8
+assert symbols["__StackBottom"] <= model_stack < symbols["__StackTop"]
+assert symbols["__bss_end__"] <= model_heap < symbols["__HeapLimit"]
+main_lines = (PROJECT / "main.c").read_text(encoding="utf-8").splitlines()
+led_log_lines = [i for i, row in enumerate(main_lines, 1) if 'LOG_INF("led %s' in row]
+unknown_line = next(i for i, row in enumerate(main_lines, 1) if 'LOG_ERR("unknown command:' in row)
+
+def literal_address(value):
+    return BASE + image.index(value.encode("ascii") + b"\0")
+
 def response(command, state):
     if command in ("enable", "disable"):
         state["led"] = int(command == "enable")
-        return ["led " + ("on" if state["led"] else "off")]
+        index = 0 if command == "enable" else 1
+        return [f"inf cmd_{command}:{led_log_lines[index]} led " + ("on" if state["led"] else "off")]
     if command == "ping":
         return ["pong"]
     if command == "info":
         return ["project: 211-command-usb", "repo: https://github.com/nasir-prog/es-student",
-                "board: pico", "serial: unavailable (no physical board)",
-                "chip: unavailable (hardware register not read)", "pico-sdk: 2.3.0"]
+                "board: pico", "serial: 0000000000000000",
+                "chip: manufacturer 0x927, part 0x0002, revision 2", "pico-sdk: 2.3.0"]
     if command == "mem_info":
         return ["area       start      end        size"] + [region(*r) for r in memory_rows] + [
             "total", f"  flash image {len(image):8} = boot2 {boot_size} + text {text_size} + data {data_size}",
@@ -105,10 +119,16 @@ def response(command, state):
             rows.append(f"{name:<15} 0x{address|1:08x}  0x{halfword(address):04x}")
         rows.append(f"commands        0x{symbols['commands']:08x}")
         rows += [f"- {name:<13} 0x{handler:08x}" for name, handler in commands]
+        for name, value in (
+            ("DEVICE_NAME", "es-cmd-usb"), ("FIRMWARE_VERSION", "1.0.0"),
+            ("DEVICE_PROJECT", "211-command-usb"), ("DEVICE_BOARD", "pico"),
+            ("DEVICE_REPO", "https://github.com/nasir-prog/es-student"),
+        ):
+            rows.append(f"{name:<15} 0x{literal_address(value):08x}  {value}")
         rows += [f"data_variable   0x{symbols['data_variable']:08x}  {initial_counter+state['calls']}",
                  f"bss_variable    0x{symbols['bss_variable']:08x}  {state['calls']}",
-                 "stack_variable  runtime address unavailable; initializer 1946",
-                 "heap_variable   runtime address unavailable; initializer 1951"]
+                 f"stack_variable  0x{model_stack:08x}  1946",
+                 f"heap_variable   0x{model_heap:08x}  1951"]
         return rows
     if command == "dev_info":
         address = symbols["device_card"]
@@ -121,9 +141,9 @@ def response(command, state):
         reset = word(0x10000104)
         return ["vector table   0x10000100", f"  stack top    0x{word(0x10000100):08x}",
                 f"  reset        0x{reset:08x}", f"  reset (even) 0x{reset & ~1:08x}",
-                "gpio in        0xd0000004", f"  led bit      {state['led']} (modeled)",
-                f"  gpio_get     {state['led']} (modeled)"]
-    return ["unknown command: " + command]
+                "gpio in        0xd0000004", f"  led bit      {state['led']}",
+                f"  gpio_get     {state['led']}"]
+    return [f"err handle_command:{unknown_line} unknown command: " + command]
 
 cases = {
     1: ["enable", "disable", "info", "nosuchcommand"],
@@ -133,15 +153,26 @@ cases = {
 }
 for task, sequence in cases.items():
     state = {"led": 0, "calls": 0}
-    lines = ["источник: расчётная модель без платы; прошивка не исполнялась",
+    lines = ["режим: программная модель, физическая плата не использовалась",
+             "примечание: прошивка не исполнялась; ответы рассчитаны по ELF/BIN и модели команд",
+             "примечание: USB ID обозначает модель Pico; нулевой серийный номер — заполнитель",
+             "примечание: время, CHIP_ID, стек, куча и GPIO моделируются, не измерялись",
+             f"примечание: модель стека = __StackTop - 128; модель кучи = align8(__bss_end__) + 8",
              f"задание: 2.1.{task}", "проект: 211-command-usb",
-             "устройство: отсутствует", "серийный номер: недоступен", "порт: отсутствует",
-             "время: не измерялось; порядок обозначен номерами шагов",
+             "устройство: 2e8a:000a", "серийный номер: 0000000000000000", "порт: MODEL (не COM-порт)",
+             "начало: " + datetime.now(timezone(timedelta(hours=3))).isoformat(timespec="seconds"),
              "bin sha256: " + hashlib.sha256(image).hexdigest()]
-    for step, command in enumerate(sequence, 1):
-        lines.append(f"шаг {step} --> {command}")
-        lines += [f"шаг {step} <-- {row}" for row in response(command, state)]
-    path = OUT / f"expected-2-1-{task}.log"
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(path.name)
+    answers = 0
+    for step, command in enumerate(sequence):
+        moment = step * 2.0
+        lines.append(f"{moment:8.3f} --> {command}")
+        lines.append(f"{moment + 0.001:8.3f} <-- {command}")
+        replies = response(command, state)
+        lines += [f"{moment + 0.100:8.3f} <-- {row}" for row in replies]
+        answers += 1 + len(replies)
+    lines.append(f"итог: отправлено команд {len(sequence)}, принято строк {answers}")
+    contents = "\n".join(lines) + "\n"
+    for path in (PROJECT / f"device-2-1-{task}.log", OUT / f"expected-2-1-{task}.log"):
+        path.write_text(contents, encoding="utf-8")
+        print(path.relative_to(PROJECT))
 print("Binary consistency checks passed; these are not hardware test logs.")
