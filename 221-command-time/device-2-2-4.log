@@ -1,0 +1,43 @@
+режим: программная модель, физическая плата не использовалась
+примечание: ARM-прошивка не исполнялась; calc_pi и profiling проверены на компьютере
+примечание: USB ID обозначает модель Pico; нулевой серийный номер — заполнитель
+примечание: времена, частоты, CHIP_ID и GPIO модельные, не измеренные на плате
+примечание: 585 тактов на член ряда; 300 тактов на обычную итерацию; вывод строки 40 мкс
+примечание: ROSC модели 5774 кГц; отсчёт обмена начинается на 3000 мс uptime
+задание: 2.2.4
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: 0000000000000000
+порт: MODEL (не COM-порт)
+начало: 2026-10-08T15:03:24+03:00
+bin sha256: aad4c34ef52400838698efb56b517fea429076f7c8a0029f5a1152d5ab934b2a
+   0.000 --> main_time_reset
+   0.001 <-- main_time_reset
+   0.001 <-- dbg read_line:133 got main_time_reset
+   0.001 <-- max reset
+   2.000 --> main_time_exec
+   2.001 <-- main_time_exec
+   2.001 <-- dbg read_line:133 got main_time_exec
+   2.001 <-- iteration avg 2.36 us, max 81 us
+   3.000 --> calc_pi
+   3.001 <-- calc_pi
+   3.001 <-- dbg read_line:133 got calc_pi
+   7.681 <-- pi: 3.14159165
+   7.681 <-- time: 4680 ms
+   9.000 --> main_time_exec
+   9.001 <-- main_time_exec
+   9.001 <-- dbg read_line:133 got main_time_exec
+   9.001 <-- iteration avg 5.52 us, max 4680000 us
+  14.000 --> main_time_exec
+  14.001 <-- main_time_exec
+  14.001 <-- dbg read_line:133 got main_time_exec
+  14.001 <-- iteration avg 2.46 us, max 4680000 us
+  15.000 --> main_time_reset
+  15.001 <-- main_time_reset
+  15.001 <-- dbg read_line:133 got main_time_reset
+  15.001 <-- max reset
+  16.000 --> main_time_exec
+  16.001 <-- main_time_exec
+  16.001 <-- dbg read_line:133 got main_time_exec
+  16.001 <-- iteration avg 2.41 us, max 82 us
+итог: отправлено команд 7, принято строк 22

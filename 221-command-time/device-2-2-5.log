@@ -1,0 +1,91 @@
+режим: программная модель, физическая плата не использовалась
+примечание: ARM-прошивка не исполнялась; calc_pi и profiling проверены на компьютере
+примечание: USB ID обозначает модель Pico; нулевой серийный номер — заполнитель
+примечание: времена, частоты, CHIP_ID и GPIO модельные, не измеренные на плате
+примечание: 585 тактов на член ряда; 300 тактов на обычную итерацию; вывод строки 40 мкс
+примечание: ROSC модели 5774 кГц; отсчёт обмена начинается на 3000 мс uptime
+задание: 2.2.5
+проект: 221-command-time
+устройство: 2e8a:000a
+серийный номер: 0000000000000000
+порт: MODEL (не COM-порт)
+начало: 2026-10-08T15:03:24+03:00
+bin sha256: aad4c34ef52400838698efb56b517fea429076f7c8a0029f5a1152d5ab934b2a
+   0.000 --> clk_info
+   0.001 <-- clk_info
+   0.001 <-- dbg read_line:133 got clk_info
+   0.001 <-- signal     set_khz measured_khz
+   0.001 <-- clk_ref      12000        12000
+   0.001 <-- clk_sys     125000       125000
+   0.001 <-- clk_peri    125000       125000
+   0.001 <-- clk_usb      48000        48000
+   0.001 <-- clk_adc      48000        48000
+   0.001 <-- rosc             -         5774
+   1.000 --> main_time_reset
+   1.001 <-- main_time_reset
+   1.001 <-- dbg read_line:133 got main_time_reset
+   1.001 <-- max reset
+   3.000 --> main_time_exec
+   3.001 <-- main_time_exec
+   3.001 <-- dbg read_line:133 got main_time_exec
+   3.001 <-- iteration avg 2.38 us, max 81 us
+   4.000 --> calc_pi
+   4.001 <-- calc_pi
+   4.001 <-- dbg read_line:133 got calc_pi
+   8.681 <-- pi: 3.14159165
+   8.681 <-- time: 4680 ms
+  10.000 --> clk_sys_low
+  10.001 <-- clk_sys_low
+  10.001 <-- dbg read_line:133 got clk_sys_low
+  10.001 <-- inf clk_sys_set:46 clk_sys 62500 kHz
+  11.000 --> clk_info
+  11.001 <-- clk_info
+  11.001 <-- dbg read_line:133 got clk_info
+  11.001 <-- signal     set_khz measured_khz
+  11.001 <-- clk_ref      12000        12000
+  11.001 <-- clk_sys      62500        62500
+  11.001 <-- clk_peri     48000        48000
+  11.001 <-- clk_usb      48000        48000
+  11.001 <-- clk_adc      48000        48000
+  11.001 <-- rosc             -         5774
+  12.000 --> uptime
+  12.001 <-- uptime
+  12.001 <-- dbg read_line:133 got uptime
+  12.001 <-- uptime: 15001 ms
+  14.000 --> uptime
+  14.001 <-- uptime
+  14.001 <-- dbg read_line:133 got uptime
+  14.001 <-- uptime: 17001 ms
+  15.000 --> main_time_reset
+  15.001 <-- main_time_reset
+  15.001 <-- dbg read_line:133 got main_time_reset
+  15.001 <-- max reset
+  17.000 --> main_time_exec
+  17.001 <-- main_time_exec
+  17.001 <-- dbg read_line:133 got main_time_exec
+  17.001 <-- iteration avg 4.84 us, max 84 us
+  18.000 --> calc_pi
+  18.001 <-- calc_pi
+  18.001 <-- dbg read_line:133 got calc_pi
+  27.361 <-- pi: 3.14159165
+  27.361 <-- time: 9360 ms
+  29.000 --> clk_sys_default
+  29.001 <-- clk_sys_default
+  29.001 <-- dbg read_line:133 got clk_sys_default
+  29.001 <-- inf clk_sys_set:46 clk_sys 125000 kHz
+  30.000 --> clk_info
+  30.001 <-- clk_info
+  30.001 <-- dbg read_line:133 got clk_info
+  30.001 <-- signal     set_khz measured_khz
+  30.001 <-- clk_ref      12000        12000
+  30.001 <-- clk_sys     125000       125000
+  30.001 <-- clk_peri     48000        48000
+  30.001 <-- clk_usb      48000        48000
+  30.001 <-- clk_adc      48000        48000
+  30.001 <-- rosc             -         5774
+  31.000 --> calc_pi
+  31.001 <-- calc_pi
+  31.001 <-- dbg read_line:133 got calc_pi
+  35.681 <-- pi: 3.14159165
+  35.681 <-- time: 4680 ms
+итог: отправлено команд 14, принято строк 63
