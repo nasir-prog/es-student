@@ -1,0 +1,72 @@
+name: Учебный прогон 2.3–3.2
+
+on:
+  push:
+    paths:
+      - '231-firmware-template/**'
+      - '239-two-buttons/**'
+      - '311-adc/**'
+      - '321-audio-recorder/**'
+      - 'libs/**'
+      - 'offline/**'
+      - '.github/workflows/check-model.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  firmware:
+    name: Сборка ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - 231-firmware-template
+          - 239-two-buttons
+          - 311-adc
+          - 321-audio-recorder
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ant-lab-ru/es-test/.github/actions/pico-toolchain@master
+      - name: Сборка для RP2040
+        env:
+          PROJECT: ${{ matrix.project }}
+        run: |
+          cmake -S "$PROJECT" -B "$RUNNER_TEMP/build"
+          cmake --build "$RUNNER_TEMP/build" --parallel 4 2>&1 | tee "$RUNNER_TEMP/build.log"
+          if grep 'warning:' "$RUNNER_TEMP/build.log"; then exit 1; fi
+          ls "$RUNNER_TEMP/build/"*.uf2
+      - name: Ограничение размера и сборка без профилирования
+        if: matrix.project == '231-firmware-template'
+        run: |
+          before=$(wc -c < "$RUNNER_TEMP/build/231_firmware_template.bin")
+          test "$before" -le 49152
+          sed -i 's/PROFILING_ENABLED=1/PROFILING_ENABLED=0/' 231-firmware-template/CMakeLists.txt
+          cmake -S 231-firmware-template -B "$RUNNER_TEMP/build-disabled"
+          cmake --build "$RUNNER_TEMP/build-disabled" --parallel 4
+          after=$(wc -c < "$RUNNER_TEMP/build-disabled/231_firmware_template.bin")
+          test "$after" -lt "$before"
+          arm-none-eabi-nm "$RUNNER_TEMP/build-disabled/231_firmware_template.elf" > "$RUNNER_TEMP/symbols"
+          ! grep -E ' (profiling_start|profiling_stop)$' "$RUNNER_TEMP/symbols"
+
+  model:
+    name: Протокол, телеметрия и аудио на учебной модели
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install matplotlib pyserial
+      - run: bash offline/run.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: es-model-results
+          path: offline/model-output/
+          if-no-files-found: error
