@@ -317,8 +317,7 @@ static void print_dma_block(const uint16_t *samples, uint32_t count, uint32_t ti
         sum += sample;
     }
 
-    const uint32_t expected = (uint32_t)(((uint64_t)count * 1000000 + PLATFORM_SAMPLE_RATE_HZ / 2) /
-                                         PLATFORM_SAMPLE_RATE_HZ);
+    const uint32_t expected = (uint32_t)((uint64_t)count * 1000000 / PLATFORM_SAMPLE_RATE_HZ);
     printf("dma_cap: %" PRIu32 " samples in %" PRIu32 " us, expected %" PRIu32
            " us, min %u max %u mean %.1f\n",
            count, time_us, expected, (unsigned)minimum, (unsigned)maximum, (double)sum / count);

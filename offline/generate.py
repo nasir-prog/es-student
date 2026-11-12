@@ -31,7 +31,7 @@ def load_recorder():
 
 def write_csv(path, rows):
     with path.open("w", newline="", encoding="utf-8") as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, lineterminator="\n")
         writer.writerow(CSV_FIELDS)
         writer.writerows(rows)
 

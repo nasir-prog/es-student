@@ -1,0 +1,89 @@
+режим: учебная программная модель, физическая плата не использовалась
+примечание: USB ID обозначает модель Pico, нулевой серийный номер — заполнитель
+примечание: время, АЦП, прерывания, DMA, сброс и сигналы в этих прогонах модельные
+задание: 3.2.6
+проект: 321-audio-recorder
+устройство: 2e8a:000a
+серийный номер: 0000000000000000
+порт: MODEL (не COM-порт)
+начало: 2026-11-12T16:37:07+03:00
+   0.000 -->
+   0.500 --> help
+   0.501 <-- help
+   0.501 <-- help               list of commands
+   0.501 <-- info               device passport
+   0.501 <-- uptime             time since reset
+   0.501 <-- led_enable         turn the LED on
+   0.501 <-- led_disable        turn the LED off
+   0.501 <-- led_blink          blink the LED
+   0.501 <-- led_period         set blink period in milliseconds
+   0.501 <-- button             show button state and press count
+   0.501 <-- pi_start           start a stepped Leibniz sum
+   0.501 <-- pi                 show the result or state of the calculation
+   0.501 <-- profiling          show stopwatch measurements
+   0.501 <-- profiling_reset    reset stopwatch measurements
+   0.501 <-- get_voltage        measure voltage on GP26
+   0.501 <-- get_temp           measure internal temperature
+   0.501 <-- tm_start           start telemetry
+   0.501 <-- tm_stop            stop telemetry
+   0.501 <-- charge_on          charge the RC circuit
+   0.501 <-- charge_off         discharge the RC circuit
+   0.501 <-- timer_blink_start  start the timer indicator
+   0.501 <-- timer_blink_stop   stop the timer indicator
+   0.501 <-- cap_start          capture ADC samples by timer
+   0.501 <-- cap_dump           print the latest timer capture
+   0.501 <-- dma_cap            capture one block via DMA
+   0.501 <-- stream_start       start 8-bit or 16-bit sampling
+   0.501 <-- stream_stop        stop sampling and show statistics
+   0.501 <-- generate_tone      generate a test tone on GP20
+   0.501 <-- wdt_enable         enable the watchdog
+   0.501 <-- hang               trigger a watchdog restart
+   0.501 <-- reset_reason       show the previous reset cause
+   0.501 <-- mic_bias           measure the microphone bias
+   0.501 <-- mic_level          measure RMS and peak microphone levels
+   1.500 --> info
+   1.501 <-- info
+   1.501 <-- name: es-recorder
+   1.501 <-- version: 1.0.0
+   1.501 <-- project: 321-audio-recorder
+   1.501 <-- repo: https://github.com/nasir-prog/es-student
+   1.501 <-- board: pico
+   1.501 <-- serial: 0000000000000000
+   1.501 <-- chip: manufacturer 0x000, part 0x0000, revision 0
+   1.501 <-- pico-sdk: 2.3.0
+   2.500 --> reset_reason
+   2.501 <-- reset_reason
+   2.501 <-- reset: other, restarts 0
+   3.000 --> wdt_enable 9000
+   3.001 <-- wdt_enable 9000
+   3.001 <-- error: timeout_ms must be 1..8388
+   3.500 --> wdt_enable 2000
+   3.501 <-- wdt_enable 2000
+   3.501 <-- wdt: enabled, timeout 2000 ms
+   4.000 --> uptime
+   4.001 <-- uptime
+   4.001 <-- uptime: 4000 ms
+   7.000 --> uptime
+   7.001 <-- uptime
+   7.001 <-- uptime: 7000 ms
+   7.500 --> hang
+   7.501 <-- hang
+   7.501 <-- hang: superloop stopped
+   9.500 --- плата снова на связи
+  10.600 --> reset_reason
+  10.601 <-- reset_reason
+  10.601 <-- reset: watchdog, restarts 1
+  11.100 --> uptime
+  11.101 <-- uptime
+  11.101 <-- uptime: 1600 ms
+  11.600 --> info
+  11.601 <-- info
+  11.601 <-- name: es-recorder
+  11.601 <-- version: 1.0.0
+  11.601 <-- project: 321-audio-recorder
+  11.601 <-- repo: https://github.com/nasir-prog/es-student
+  11.601 <-- board: pico
+  11.601 <-- serial: 0000000000000000
+  11.601 <-- chip: manufacturer 0x000, part 0x0000, revision 0
+  11.601 <-- pico-sdk: 2.3.0
+итог: отправлено кадров 12, принято строк 66

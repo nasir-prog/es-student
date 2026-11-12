@@ -1,0 +1,9 @@
+Учебная модель: данные рассчитаны программой без платы Raspberry Pi Pico.
+R_kohm = 10
+C_uf = 100
+tau_expected_s = 1.000
+tau_min_s = 0.760
+tau_max_s = 1.260
+tau_charge_s = 0.960
+tau_discharge_s = 0.970
+result = ok

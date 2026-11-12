@@ -34,7 +34,24 @@
 
 GitHub Actions собирает все четыре прошивки для RP2040 и выполняет статические проверки курса и учебный прогон. Прогон компилирует и запускает C-модули на компьютере с модельными входами, проверяет протокол, задачи и двоичные кадры, строит графики и создаёт WAV из синтетических сигналов. Артефакт `es-model-results` доступен на странице успешного запуска.
 
-Логи, CSV, графики и WAV помечены как учебные. Значения напряжения, времени, температуры и звуковые сигналы получены из программной модели. Для 2.3.8 и заданий 3.1–3.2 используется проверка в этом репозитории. Статические проверки 2.3 отправляют свои результаты в кабинет курса через существующий секрет.
+Логи, графики и WAV для 2.3.8, 3.1 и 3.2 получены на учебной программной модели. Команды обрабатывают C-модули проектов с модельными часами и входами. Отсчёты АЦП, прерывания, сброс и звук моделируются. CSV телеметрии получен из командного потока модели, данные RC-цепи рассчитаны для 10 кОм и 100 мкФ. Логи начинаются с пометки о модели и поясняют формат USB ID и нулевого серийного номера. На графиках и в WAV указано происхождение данных.
+
+Для сдачи каждый пункт запускает официальный workflow ant-lab и отправляет отчёт в кабинет через существующий секрет. Файлы в папках проектов можно воспроизвести командой `bash offline/course_logs.sh` на Linux с GCC, Python, matplotlib и pyserial.
+
+[![2.3.8](https://github.com/nasir-prog/es-student/actions/workflows/check-2-3-8.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-2-3-8.yml)
+[![3.1.1](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-1.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-1.yml)
+[![3.1.2](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-2.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-2.yml)
+[![3.1.3](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-3.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-3.yml)
+[![3.1.4](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-4.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-4.yml)
+[![3.1.5](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-5.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-1-5.yml)
+[![3.2.1](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-1.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-1.yml)
+[![3.2.2](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-2.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-2.yml)
+[![3.2.3](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-3.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-3.yml)
+[![3.2.4](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-4.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-4.yml)
+[![3.2.5](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-5.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-5.yml)
+[![3.2.6](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-6.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-6.yml)
+[![3.2.7](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-7.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-7.yml)
+[![3.2.7д](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-7d.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-2-7d.yml)
 
 Запуск на Linux с GCC и Python:
 
