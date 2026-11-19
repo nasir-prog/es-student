@@ -64,8 +64,9 @@ def read_trace(executable, steps):
         f"{round(seconds * 1000000)} {frame.encode('ascii').hex() if frame else '-'}\n"
         for frame, seconds in steps
     )
+    command = executable if isinstance(executable, list) else [executable]
     run = subprocess.run(
-        [executable], input=data, text=True, capture_output=True, check=True, timeout=15,
+        command, input=data, text=True, capture_output=True, check=True, timeout=15,
     )
     blocks = run.stdout.split("\n@@END@@\n")
     if blocks[-1] or len(blocks) != len(steps) + 1:
@@ -86,8 +87,8 @@ def printable(line):
     return line.replace("\x7f", "<BS>").replace("\b", "<BS>").replace("\r", "").replace("\n", "")
 
 
-def write_trace(path, task, project, executable, steps):
-    log = [header(task, project).rstrip()]
+def write_trace(path, task, project, executable, steps, metadata=()):
+    log = [header(task, project).rstrip(), *metadata]
     sent = received = 0
     now = 0.0
     for (frame, seconds), block in zip(steps, read_trace(executable, steps), strict=True):
@@ -95,12 +96,15 @@ def write_trace(path, task, project, executable, steps):
             log.append(f"{now:8.3f} --> {printable(frame).strip()}".rstrip())
             sent += 1
         for raw in block:
+            timing = re.match(r"^@@US (\d+)@@ ", raw)
+            if timing:
+                raw = raw[timing.end():]
             line = printable(raw).strip()
             if line == "@@RECONNECT@@":
                 now += 2.0
                 log.append(f"{now:8.3f} --- плата снова на связи")
             elif line:
-                timestamp = now + 0.001
+                timestamp = int(timing[1]) / 1000000 if timing else now + 0.001
                 if line.startswith("tm: "):
                     timestamp = max(timestamp, int(line.split()[1]) / 1000000)
                 log.append(f"{timestamp:8.3f} <-- {line}")

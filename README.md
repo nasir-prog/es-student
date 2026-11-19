@@ -68,3 +68,13 @@ cmake --build 231-firmware-template/build
 ```
 
 Скрипты сбора данных и статические проверки взяты из [книги курса ant-lab](https://github.com/ant-lab-ru/es-book) по [лицензии MIT](LICENSE-ant-lab).
+
+## Практика 3.3
+
+[331-uart](331-uart/) содержит прошивку, пять логов учебной модели и осциллограмму UART.
+
+[![3.3.1](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-1.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-1.yml)
+[![3.3.2](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-2.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-2.yml)
+[![3.3.3](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-3.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-3.yml)
+[![3.3.4](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-4.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-4.yml)
+[![3.3.5](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-5.yml/badge.svg)](https://github.com/nasir-prog/es-student/actions/workflows/check-3-3-5.yml)
